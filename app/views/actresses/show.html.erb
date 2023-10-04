@@ -1,0 +1,56 @@
+
+<div class="show_actress_container">
+    <div class="show_actress">
+        <%if @actress.cloud_image.present? %>
+          <%= image_tag(@actress.cloud_image) %>
+        <%end%>
+        <h3> Id: <%= @actress.id %> </h3>
+        <h3> First Name: <%= @actress.first_name %> </h3>
+        <h3> Last Name: <%= @actress.last_name %> </h3>
+        <h3> Created At: <%= @actress.created_at %> </h3>
+        <h3> Updated At: <%= @actress.updated_at %> </h3>
+        <h3> Description: <%= @actress.description %> </h3>
+        <h3> Total Clips: <%= @clips.count %> </h3>
+    </div>
+</div>
+
+<div class="headings">
+    <h1> All Clips </h1>
+</div>
+
+<div class="suggested_clips">
+<% @clips.each do |clip| %>
+    <div class="suggested_clip">
+        <div class="suggested_clip_info">
+
+          <% require 'uri' %>
+          <% url= URI.parse(request.original_url) %>
+          <% if url.host.to_s == 'localhost' %>
+            <% @link = "http://" + url.host.to_s + ":3000/clips/" +clip.id.to_s %>
+          <% else %>
+            <% @link = "http://" + url.host.to_s + "/clips/" +clip.id.to_s %>
+          <% end %>
+
+          <% if clip.custom_video_link.present? %>
+            <a href= <%=@link%> >
+              <video width="200px" height="200px">
+                <source src=<%= clip.custom_video_link%>>
+              </video>
+            </a>
+          <%end%>
+          <p> Actress:    <%= @actress.first_name %> &nbsp
+                          <%= @actress.last_name %> </p>
+          <p> Movie:      <%= clip.movie %> </p>
+          <p> Date Added: <%= clip.created_at %> </p>
+          <p> Tags:  &nbsp <span style="background-color:#6495ED"> <%= clip.clip_tag1 %> </span>
+                     &nbsp <span style="background-color:#6495ED"> <%= clip.clip_tag2 %> </span>
+                     &nbsp <span style="background-color:#6495ED"> <%= clip.clip_tag3 %> </span> </p>
+          <p>
+                       &nbsp <span class="col-md-4"> <%= link_to("Edit", edit_clip_path(clip)) %> </span>
+                       &nbsp <span class="col-md-4"> <%= link_to("Delete", delete_clip_path(clip)) %> </span> </p>
+        </div>
+    </div>
+<%end %>
+</div>
+
+</div>

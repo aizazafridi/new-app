@@ -1,0 +1,48 @@
+<div class="container">
+
+  <div class="search">
+  <%= form_with url: "/clips", method: :get do %>
+    <div class="input-group">
+      <%= search_field_tag :search, params[:search], placeholder: "Enter Movie Name", class: "form-control" %>
+        <div class="input-group-btn">
+          <%= button_tag "Search", :class => 'btn btn-info glyphicon glyphicon-search',:name => nil%>
+        </div>
+      </div>
+  <% end %>
+  </div>
+
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th class="col-md-1"> Actress ID</th>
+      <th class="col-md-2"> Category</th>
+      <th class="col-md-2"> Image</th>
+      <th class="col-md-3"> Movie </th>
+      <th class="col-md-1"> Views</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @clips.each do |clip| %>
+      <tr>
+        <td class="col-md-1"> <%= clip.actress_id %> </td>
+        <td class="col-md-2"> <%= clip.clip_category %> </td>
+        <td class="col-md-3">
+          <% if clip.custom_video_link.present? %>
+            <video style="width: 50%; height: 200px; object-fit: cover">
+              <source src= <%=clip.custom_video_link%>>
+            </video>
+          <% end %>
+        </td>
+        <td class="col-md-3"> <%= clip.movie %> </td>
+        <td class="col-md-1"> <%= clip.views %> </td>
+        <td class="col-md-1"> <%= link_to("Show",clip_path(clip)) %> </td>
+        <td class="col-md-1"> <%= link_to("Edit", edit_clip_path(clip)) %> </td>
+        <td class="col-md-1"> <%= link_to("Delete", delete_clip_path(clip)) %> </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @clips, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+
+</div>

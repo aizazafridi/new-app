@@ -1,0 +1,25 @@
+<div class="container">
+
+<%= form_for(@actress) do |f| %>
+
+<table class = "table table-striped table-bordered" >
+
+  <tr>
+    <th>First Name</th>
+    <td><%= f.text_field(:first_name) %></td>
+  </tr>
+  <tr>
+    <th>Last Name</th>
+    <td><%= f.text_field(:last_name) %></td>
+  </tr>
+  <tr>
+    <th>Image cloud URL</th>
+    <td><%= f.text_field(:cloud_image) %></td>
+  </tr>
+
+</table>
+
+<%= f.submit("Update Actress") %>
+<%end %>
+
+</div>

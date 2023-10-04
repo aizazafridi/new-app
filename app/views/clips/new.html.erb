@@ -1,0 +1,53 @@
+<div class="container">
+
+<%= form_for(@clip, :html => {:multipart => true}) do |f| %>
+
+<table class = "table table-striped table-bordered" >
+
+  <tr>
+    <th>Youtube Url</th>
+    <td> <%= f.text_area(:clip_src, :rows => 2, style: 'width:100%;') %> </td>
+  </tr>
+  <tr>
+    <th>Mediafire URL</th>
+    <td> <%= f.text_area(:custom_video_link, :rows => 2, style: 'width:100%;') %> </td>
+  </tr>
+  <tr>
+    <th>Movie</th>
+    <td> <%= f.text_field(:movie, style: 'width:80%;') %> </td>
+  </tr>
+  <tr>
+    <th>Category</th>
+    <td> <%= f.select :clip_category, options_for_select(['movie', 'web-series', 'adult']), {}, {class:"form-control"} %> </td>
+  </tr>
+  <tr>
+    <th>Tag1</th>
+    <td> <%= f.text_field(:clip_tag1) %> </td>
+  </tr>
+  <tr>
+    <th>Tag2</th>
+    <td> <%= f.text_field(:clip_tag2) %></td>
+  </tr>
+  <tr>
+    <th>Tag3</th>
+    <td> <%= f.text_field(:clip_tag3) %></td>
+  </tr>
+  <tr>
+    <th>Tag4</th>
+    <td><%= f.text_field(:clip_tag4) %></td>
+  </tr>
+  <tr>
+    <th>Tag5</th>
+    <td> <%= f.text_field(:clip_tag5) %></td>
+  </tr>
+  <tr>
+    <th>Actress<th>
+    <%= f.collection_select(:actress_id, Actress.order(:first_name), :id, :full_name, {:include_blank => false}, {class: "form-control"}) %>
+  </tr>
+
+</table>
+
+<%=f.submit("Add Clip")%>
+<%end %>
+
+</div>

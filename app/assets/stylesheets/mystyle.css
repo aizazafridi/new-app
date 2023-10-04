@@ -1,0 +1,417 @@
+
+.flex-container {
+    display: flex;
+    background-color: #eee;
+}
+
+.top_container {
+    display: flex;
+    flex-direction: row;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: #E8E8E8
+}
+
+.clips p {
+  font-family: "Lucida Console", Courier, monospace;
+  font-size:15px;
+  line-height: normal;
+}
+
+.feature_container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 10px;
+  justify-content: center;
+
+}
+
+.feature_item {
+  margin: 20px;
+  font-family: "Lucida Console", Courier, monospace;
+  font-size: 25px;
+  background-color: #fff;
+}
+
+.feature_item img {
+  height: 600px;
+  width: 600px;
+  margin: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.feature_item img:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+.feature_item h1 {
+  font-weight:bold;
+  font-family: "Lucida Console", Courier, monospace;
+  font-size: 35px;
+  margin: 20px;
+  color: #0c6a93;
+  text-align: center;
+}
+
+.feature_item h2 {
+  font-weight:normal;
+  font-family: "Lucida Console", Courier, monospace;
+  font-size: 25px;
+  margin: 20px;
+  color: #0c6a93;
+  text-align: center;
+}
+
+.feature_item h3 {
+  font-weight:normal;
+  font-family: "Lucida Console", Courier, monospace;
+  font-size: 15px;
+  margin: 20px;
+  color: #0c6a93;
+  text-align: center;
+}
+
+
+.clips_container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 10px;
+  border-radius: 10px;
+  justify-content: flex-start;
+}
+
+.actresses_container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 10px;
+  border-radius: 10px;
+  justify-content: space-around;
+}
+
+.clips_page_container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 10px;
+  border-radius: 10px;
+  justify-content: space-around;
+}
+
+.clips_page_clips {
+  flex-basis: 0;
+  margin: 20px;
+  background-color: #fff;
+}
+
+.clips_page_clips img {
+  border-radius: 5px;
+  flex-grow:0;
+  flex-shrink:0;
+  width: 200px;
+  height: 200px;
+  margin: 5px;
+}
+
+.clips_page_clips video {
+  border-radius: 5px;
+  flex-grow:0;
+  flex-shrink:0;
+  width: 200px;
+  height: 200px;
+  margin: 5px;
+}
+
+
+.clips_page_clips h3 {
+  font-weight:normal;
+  font-family: "Lucida Console", Courier, monospace;
+  font-size: 15px;
+  margin: 20px;
+  color: #0c6a93;
+  text-align: center;
+}
+
+.clips {
+  flex-basis: 0;
+  margin: 20px;
+  background-color: #fff;
+}
+
+.clips img {
+    border-radius: 5px;
+    flex-grow:0;
+    flex-shrink:0;
+    width: 200px;
+    height: 200px;
+    margin: 5px;
+}
+
+.clips h3 {
+  font-weight:normal;
+  font-family: "Lucida Console", Courier, monospace;
+  font-size: 15px;
+  margin: 20px;
+  color: #0c6a93;
+  text-align: center;
+}
+
+.actress {
+  flex-basis: 0;
+  margin: 20px;
+  background-color: #fff;
+}
+
+.actress img {
+    margin: 5px;
+    flex-grow:0;
+    flex-shrink:0;
+    width: 300px;
+    height: 300px;
+    margin: 5px;
+}
+
+.actress h3 {
+  font-weight:normal;
+  font-family: "Lucida Console", Courier, monospace;
+  font-size: 15px;
+  margin: 20px;
+  color: #0c6a93;
+  text-align: center;
+}
+
+.vdo {
+    margin: 20px;
+    border-radius: 10px;
+    background-color: grey;
+}
+
+.vdo video {
+    margin: 5px;
+    width: 200px;
+    height: 200px;
+}
+
+
+.adds {
+    display: flex;
+    width: 2%;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+}
+
+.add {
+    margin: 5px;
+}
+
+.top_highlight {
+  position: relative;
+  text-align: center;
+  height: 100px;
+  display: block;
+  background-color: white;
+}
+
+.actress_description {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-weight:bold;
+}
+
+.search {
+  display:flex;
+  justify-content: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.search h3 {
+  font-weight:normal;
+  font-family: "Lucida Console", Courier, monospace;
+  font-size: 15px;
+  margin: 5px;
+  color: #0c6a93;
+}
+
+.headings {
+  display: flex;
+  margin-left: 25px;
+  margin-right: 25px;
+  background-color: #fff;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  width: 100%;
+}
+
+.headings h1 {
+  font-weight:bold;
+  font-family: "Lucida Console", Courier, monospace;
+  font-size: 25px;
+  margin: 5px;
+  color: #0c6a93;
+}
+
+.headings h2 {
+  font-weight:normal;
+  font-family: "Lucida Console", Courier, monospace;
+  font-size: 18px;
+  margin: 5px;
+  color: #0c6a93;
+}
+
+.show_clip_container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 10px;
+  justify-content: center;
+}
+
+.display_clip {
+  margin: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.display_clip h3 {
+  font-weight: normal;
+  font-family: "Lucida Console", Courier, monospace;
+  font-size: 15px;
+  margin: 20px;
+  color: #0c6a93;
+  text-align: left;
+}
+
+.suggested_clips {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: left;
+  flex-wrap: wrap;
+  margin: 10px;
+  justify-content: center;
+}
+
+.suggested_clip {
+  flex-basis: 0;
+  margin: 20px;
+  background-color: #fff;;
+}
+
+.suggested_clip img {
+  border-radius: 5px;
+  flex-grow:0;
+  flex-shrink:0;
+  width: 200px;
+  height: 200px;
+  margin: 5px;
+}
+
+.suggested_clip_info {
+  display: inline-block;
+  vertical-align: top;
+  padding: 0 0 0 5px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.suggested_clip_info p {
+  font-weight:normal;
+  font-family: "Lucida Console", Courier, monospace;
+  font-size: 15px;
+  margin-top: 5px;
+  color: #0c6a93;
+}
+
+.more_clips_text {
+  display: flex;
+  margin-left: 25px;
+  background-color: #fff;
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+.more_clips_text h4 {
+  font-weight:bold;
+  font-family: "Lucida Console", Courier, monospace;
+  font-size: 20px;
+  margin: 5px;
+  color: #0c6a93;
+}
+
+.show_actress_container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 10px;
+  justify-content: center;
+
+}
+
+.show_actress {
+  margin: 20px;
+  font-family: "Lucida Console", Courier, monospace;
+  font-size: 25px;
+  background-color: #fff;
+}
+
+.show_actress img {
+  height: 600px;
+  width: 600px;
+  margin: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.show_actress h3 {
+  font-weight: normal;
+  font-family: "Lucida Console", Courier, monospace;
+  font-size: 15px;
+  margin: 20px;
+  color: #0c6a93;
+  text-align: center;
+}
+
+.fixed_size_image {
+  height: 200px;
+  width: 200px;
+}
+
+.navbar-brand img {
+  max-height: 50px;
+}
+.navbar-brand {
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: #683aa4;
+}
+nav ul li a {
+  color: #a9a9a9;
+  font-size: 22px;
+  margin: auto 10px;
+}
+nav ul li a:hover {
+  color: black;
+}
