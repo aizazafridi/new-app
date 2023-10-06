@@ -1,0 +1,66 @@
+<html>
+
+<div class="container">
+
+<div class="row">
+<% if (!@clips.present?) %>
+    <p> No clips found, please enter first few characters of movie name and try again </p>
+<% end %>
+
+<div class="search">
+  <%= form_with url: "/home/browse_cl", method: :get do %>
+    <div class="input-group">
+      <%= search_field_tag :search, params[:search], placeholder: "Enter Movie Name To Search", class: "form-control" %>
+        <div class="input-group-btn">
+          <%= button_tag "Search", :class => 'btn btn-info',:name => nil%>
+        </div>
+    </div>
+  <% end %>
+</div>
+
+<% @clips.each do |clip|
+    @temp_actress = Actress.find_by_id(clip.actress_id)
+    @link = "/home/clip/"+clip.id.to_s %>
+    <div class="col-sm-12">
+        <figure class="item">
+            <% if clip.custom_video_link.present? %>
+                <a href= <%=@link%> >
+                    <video style="width: 50%; height: 200px; object-fit: cover"">
+                        <source src= <%=clip.custom_video_link%>>
+                    </video>
+                </a>
+            <% end %>
+            <figcaption class="caption"> <%= link_to @temp_actress.first_name + " " + @temp_actress.last_name, {:controller => "home", :action => "actress", :id => @temp_actress.id}, {:style=>'color:black;'} %> </figcaption>
+            <figcaption class="caption"> <%= link_to clip.movie, {:controller => "home", :action => "search_cl", :tag => clip.movie }, {:style=>'color:black;'} %> </figcaption>
+            <figcaption class="caption"> Tags: &nbsp
+                     <%if clip.clip_tag1.present? %>
+                        <%= link_to clip.clip_tag1, {:controller => "home", :action => "search_cl", :tag => clip.clip_tag1 }, {:style=>'color:black;'} %>
+                     <%end%>
+                     &nbsp
+                     <%if clip.clip_tag2.present? %>
+                        <%= link_to clip.clip_tag2, {:controller => "home", :action => "search_cl", :tag => clip.clip_tag2 }, {:style=>'color:black;'} %>
+                     <%end%>
+                     &nbsp
+                     <%if clip.clip_tag3.present? %>
+                        <%= link_to clip.clip_tag3, {:controller => "home", :action => "search_cl", :tag => clip.clip_tag3 }, {:style=>'color:black;'} %>
+                     <%end%>
+                     &nbsp
+                     <%if clip.clip_tag4.present? %>
+                        <%= link_to clip.clip_tag4, {:controller => "home", :action => "search_cl", :tag => clip.clip_tag4 }, {:style=>'color:black;'} %>
+                     <%end%>
+                     &nbsp
+                     <%if clip.clip_tag5.present? %>
+                        <%= link_to clip.clip_tag5, {:controller => "home", :action => "search_cl", :tag => clip.clip_tag5 }, {:style=>'color:black;'} %>
+                     <%end%>
+              </figcaption>
+              <figcaption class="caption"> Category: <%= link_to clip.clip_category, {:controller => "home", :action => "search_cl", :tag => clip.clip_category }, {:style=>'color:black;'} %> </<figcaption>
+        </figure>
+    </div>
+<% end %>
+</div>
+
+<%= will_paginate @clips, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+
+</div>
+
+</html>

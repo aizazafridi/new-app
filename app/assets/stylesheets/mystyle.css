@@ -204,33 +204,6 @@
 }
 
 
-.adds {
-    display: flex;
-    width: 2%;
-    flex-direction: column;
-    justify-content: center;
-    background-color: white;
-}
-
-.add {
-    margin: 5px;
-}
-
-.top_highlight {
-  position: relative;
-  text-align: center;
-  height: 100px;
-  display: block;
-  background-color: white;
-}
-
-.actress_description {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  font-weight:bold;
-}
-
 .search {
   display:flex;
   justify-content: left;
@@ -414,4 +387,81 @@ nav ul li a {
 }
 nav ul li a:hover {
   color: black;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+body h1 {
+  text-align: left;
+  font-weight: bolder;
+  font-size: 25px;
+  margin: 5px;
+}
+
+body h3 {
+  font-size: 20px;
+  text-align: left;
+  margin: 10px;
+}
+
+figure.item {
+  /* To correctly align image, regardless of content height: */
+  vertical-align: top;
+  display: inline-block;
+  /* To horizontally center images and caption */
+  text-align: left;
+  /* The width of the container also implies margin around the images. */
+  background-color: white;
+  width: 100%;
+}
+
+img {
+  margin: 5px;
+  border-radius: 5px;
+  float: left;
+}
+
+video {
+  margin: 5px;
+  border-radius: 5px;
+  float: left;
+}
+
+.caption {
+  /* Make the caption a block so it occupies its own line. */
+  display: block;
+  margin: 5px;
+
+}
+
+.col-sm-4 {
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.col-sm-6 {
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.col-sm-12 {
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.col-md-4 {
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.col-md-6 {
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.col-md-12 {
+  border-radius: 5px;
+  padding: 10px;
 }
