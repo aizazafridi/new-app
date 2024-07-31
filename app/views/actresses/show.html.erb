@@ -31,13 +31,18 @@
             <% @link = "http://" + url.host.to_s + "/clips/" +clip.id.to_s %>
           <% end %>
 
-          <% if clip.custom_video_link.present? %>
-            <a href= <%=@link%> >
-              <video width="200px" height="200px">
-                <source src=<%= clip.custom_video_link%>>
-              </video>
-            </a>
-          <%end%>
+          <% if clip.image_src.present? %>
+              <a href= <%=@link%> >
+                  <img src="<%= clip.image_src %>" style="width: 50%; height: 200px; object-fit: cover;" alt="Image">
+              </a>
+          <% else %>
+              <a href= <%=@link%> >
+                  <video style="width: 50%; height: 200px; object-fit: cover" preload="metadata" muted>
+                      <source src= <%=clip.custom_video_link%>>
+                  </video>
+              </a>
+          <% end %>
+
           <p> Actress:    <%= @actress.first_name %> &nbsp
                           <%= @actress.last_name %> </p>
           <p> Movie:      <%= clip.movie %> </p>

@@ -11,11 +11,13 @@
         @link = "/home/clip/"+clip.id.to_s %>
         <div class="col-md-6">
           <figure class="item">
-            <% if clip.custom_video_link.present? %>
+            <% if clip.image_src.present? %>
               <a href= <%=@link%> >
-                <video style="width: 50%; height: 200px; object-fit: cover" preload="metadata">
-                  <source src= <%=clip.custom_video_link%>>
-                </video>
+                <img src="<%= clip.image_src %>" style="width: 50%; height: 200px; object-fit: cover;" alt="Image" loading="lazy">
+              </a>
+            <%else%>
+              <a href= <%=@link%> >
+                <img style="width: 50%; height: 200px; object-fit: cover; background-color: #d3d3d3;">
               </a>
             <% end %>
             <figcaption class="caption"> <%= link_to (@temp_actress.first_name + " " + @temp_actress.last_name), {:controller => "home", :action => "actress", :id => @temp_actress.id}, {:style=>'color:black; font-weight:bolder;'} %> </figcaption>
@@ -55,11 +57,13 @@
         @link = "/home/clip/"+clip.id.to_s %>
         <div class="col-md-6">
           <figure class="item">
-            <% if clip.custom_video_link.present? %>
+            <% if clip.image_src.present? %>
               <a href= <%=@link%> >
-                <video style="width: 50%; height: 200px; object-fit: cover" preload="metadata">
-                  <source src= <%=clip.custom_video_link%>>
-                </video>
+                <img src="<%= clip.image_src %>" style="width: 50%; height: 200px; object-fit: cover;" alt="Image" loading="lazy">
+              </a>
+            <%else%>
+              <a href= <%=@link%> >
+                <img style="width: 50%; height: 200px; object-fit: cover; background-color: #d3d3d3;">
               </a>
             <% end %>
             <figcaption class="caption"> <%= link_to (@temp_actress.first_name + " " + @temp_actress.last_name), {:controller => "home", :action => "actress", :id => @temp_actress.id}, {:style=>'color:black; font-weight:bolder;'} %> </figcaption>
@@ -102,11 +106,13 @@
         @link = "/home/clip/"+clip.id.to_s %>
         <div class="col-md-6">
           <figure class="item">
-            <% if clip.custom_video_link.present? %>
+            <% if clip.image_src.present? %>
               <a href= <%=@link%> >
-                <video style="width: 50%; height: 200px; object-fit: cover" preload="metadata">
-                  <source src= <%=clip.custom_video_link%>>
-                </video>
+                <img src="<%= clip.image_src %>" style="width: 50%; height: 200px; object-fit: cover;" alt="Image" loading="lazy" />
+              </a>
+            <%else%>
+              <a href= <%=@link%> >
+                <img style="width: 50%; height: 200px; object-fit: cover; background-color: #d3d3d3;">
               </a>
             <% end %>
             <figcaption class="caption"> <%= link_to (@temp_actress.first_name + " " + @temp_actress.last_name), {:controller => "home", :action => "actress", :id => @temp_actress.id}, {:style=>'color:black; font-weight:bolder;'} %> </figcaption>
@@ -141,18 +147,20 @@
     <h4> <%= link_to "view more", {:controller => "home", :action => "search_cl", :tag => "movie" }, {:style=>'color:black; font-weight:bolder;'} %> </h4>
     <br />
 
-    <h1>Recently added clips from Adult Movies</h1>
+    <h1>Recently added NSFW clips</h1>
     <div class="row">
       <% @nsfw_clips.each do |clip|
         @temp_actress = Actress.find_by_id(clip.actress_id)
         @link = "/home/clip/"+clip.id.to_s %>
         <div class="col-md-6">
           <figure class="item">
-            <% if clip.custom_video_link.present? %>
+            <% if clip.image_src.present? %>
               <a href= <%=@link%> >
-                <video style="width: 50%; height: 200px; object-fit: cover" preload="metadata">
-                  <source src= <%=clip.custom_video_link%>>
-                </video>
+                <img src="<%= clip.image_src %>" style="width: 50%; height: 200px; object-fit: cover;" alt="Image" loading="lazy">
+              </a>
+            <%else%>
+              <a href= <%=@link%> >
+                <img style="width: 50%; height: 200px; object-fit: cover; background-color: #d3d3d3;">
               </a>
             <% end %>
             <figcaption class="caption"> <%= link_to (@temp_actress.first_name + " " + @temp_actress.last_name), {:controller => "home", :action => "actress", :id => @temp_actress.id}, {:style=>'color:black; font-weight:bolder;'} %> </figcaption>
@@ -184,7 +192,7 @@
       <%end%>
     </div>
 
-    <h4> <%= link_to "view more", {:controller => "home", :action => "search_cl", :tag => "adult" }, {:style=>'color:black; font-weight:bolder;'} %> </h4>
+    <h4> <%= link_to "view more", {:controller => "home", :action => "search_cl", :tag => "nsfw" }, {:style=>'color:black; font-weight:bolder;'} %> </h4>
     <br />
 
 </div>

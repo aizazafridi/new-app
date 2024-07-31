@@ -20,6 +20,26 @@ class HomeController < ApplicationController
       .order('created_at desc')
   end
 
+  def index2
+    @west_category = 'west'
+    @east_category = 'east'
+    @camera_category = 'camera'
+    # random clips
+    @random_clips = CloudClip.order("RANDOM()").limit(5)
+    #west
+    @west_clips = CloudClip.paginate(:page => params[:page], :per_page => 5)
+      .where("category" => @west_category)
+      .order('created_at desc')
+    #east
+    @east_clips = CloudClip.paginate(:page => params[:page], :per_page => 5)
+      .where("category" => @east_category)
+      .order('created_at desc')
+    #camera
+    @camera_clips = CloudClip.paginate(:page => params[:page], :per_page => 5)
+      .where("category" => @camera_category)
+      .order('created_at desc')
+  end
+
   def browse_ac
     if params[:search].blank?
       @actresses = Actress.paginate(:page => params[:page], :per_page => 15).order(:first_name)
@@ -38,9 +58,18 @@ class HomeController < ApplicationController
     end
   end
 
+  def browse_cl_cloud
+    if params[:search].blank?
+      @cloud_clips = CloudClip.paginate(:page => params[:page], :per_page => 10).order('created_at desc')
+    else
+      @parameter = params[:search].downcase
+      @cloud_clips = CloudClip.paginate(:page => params[:page], :per_page => 10).order('created_at desc').where("lower(description) LIKE :search", search: "%#{@parameter}%")
+    end
+  end
+
   def search_cl
     @series_category = 'web-series'
-    @nsfw_category = 'adult'
+    @nsfw_category = 'nsfw'
     @movie_category = 'movie'
     @tag = params[:tag]
     if @tag == @movie_category
@@ -67,10 +96,39 @@ class HomeController < ApplicationController
     end
   end
 
+  def search_cl_cloud
+    @east_category = 'east'
+    @west_category = 'west'
+    @camera_category = 'camera'
+    @tag = params[:tag]
+    if @tag == @east_category
+      @cloud_clips = CloudClip.paginate(:page => params[:page], :per_page => 10)
+        .where("category" => @east_category)
+        .order('created_at desc')
+    elsif @tag == @west_category
+      @cloud_clips = CloudClip.paginate(:page => params[:page], :per_page => 10)
+        .where("category" => @west_category)
+        .order('created_at desc')
+    elsif @tag == @camera_category
+      @cloud_clips = CloudClip.paginate(:page => params[:page], :per_page => 10)
+        .where("category" => @camera_category)
+        .order('created_at desc')
+    else
+      @cloud_clips = CloudClip.paginate(:page => params[:page], :per_page => 10)
+       .where("description" => @tag)
+       .order('created_at desc')
+    end
+  end
+
   def clip
       @clip = Clip.find(params[:id])
       @actress = Actress.find(@clip.actress_id)
       @suggested_clips = Clip.order("RANDOM()").limit(10)
+  end
+
+  def clip_cloud
+    @cloud_clip = CloudClip.find(params[:id])
+    @suggested_clips = CloudClip.order("RANDOM()").limit(10)
   end
 
   def actress
