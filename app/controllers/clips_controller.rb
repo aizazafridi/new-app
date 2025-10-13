@@ -152,28 +152,28 @@ class ClipsController < ApplicationController
   #end
 
   # Method that extracts a png image from a video file and saves it
-def extract_first_frame(video_path)
-  output_image_path = Rails.root.join('app', 'assets', 'images', 'first_frame.png')
+  def extract_first_frame(video_path)
+    output_image_path = Rails.root.join('app', 'assets', 'images', 'first_frame.png')
 
-  begin
-    File.delete(output_image_path) if File.exist?(output_image_path)
+    begin
+      File.delete(output_image_path) if File.exist?(output_image_path)
 
-    movie = FFMPEG::Movie.new(video_path)
-    # Get the first frame and save it as an image (PNG or JPEG)
-    movie.screenshot(output_image_path.to_s, seek_time: 5)
+      movie = FFMPEG::Movie.new(video_path)
+      # Get the first frame and save it as an image (PNG or JPEG)
+      movie.screenshot(output_image_path.to_s, seek_time: 5)
 
-    return output_image_path.to_s
-  rescue => e
-    Rails.logger.error "Failed to extract first frame: #{e.message}"
-    return ""
+      return output_image_path.to_s
+    rescue => e
+      Rails.logger.error "Failed to extract first frame: #{e.message}"
+      return ""
+    end
   end
-end
 
   # Method that gets the session token from mediafire account
   # session_token is used in API endpoints for security
   def get_token
     appid = '42511'
-    email = 'email@xyz.xom
+    email = 'email@xyz.com'
     passwd = ''
     signature = Digest::SHA1.hexdigest("#{email}#{passwd}#{appid}")
     params = {
