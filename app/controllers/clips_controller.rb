@@ -3,8 +3,9 @@ require 'fileutils'
 require 'net/http'
 require 'streamio-ffmpeg'
 require 'nokogiri'
-require 'dropbox_api'
 require 'yaml'
+require 'oauth2'
+require 'dropbox_api'
 
 class ClipsController < ApplicationController
 
@@ -284,14 +285,25 @@ class ClipsController < ApplicationController
    return file_url
  end
 
+ # Method that uses refresh token to connect to dropbox client
+ def dropbox_client
+  oauth_client = OAuth2::Client.new(
+    ENV['DROPBOX_APP_KEY'],
+    ENV['DROPBOX_APP_SECRET'],
+    site: 'https://api.dropbox.com',
+    token_url: '/oauth2/token'
+  )
+
+  token = OAuth2::AccessToken.from_hash(
+    oauth_client,
+    refresh_token: ENV['DROPBOX_REFRESH_TOKEN']
+  ).refresh!
+
+  DropboxApi::Client.new(token.token)
+end
+
  # Method that uploads image to Dropbox and retrieves file url
  def upload_image_dropbox(image_path, file_name)
-
-   access_token= ENV['DROPBOX_ACCESS_TOKEN']
-
-   if access_token.nil? || access_token.strip.empty?
-     abort("⚠️ Dropbox access token missing in config.yml")
-   end
 
    # Ensure file exists locally
    unless File.exist?(image_path)
@@ -299,33 +311,36 @@ class ClipsController < ApplicationController
      return nil
    end
 
-   puts file_name
    # Set Dropbox destination filename
    dropbox_dest = "/Images/#{file_name}"
 
    # --- UPLOAD IMAGE TO DROPBOX ---
    begin
-     client = DropboxApi::Client.new(access_token)
 
      puts "📤 Uploading #{image_path} → Dropbox: #{dropbox_dest} ..."
-     file = File.open(image_path, 'rb') { |f| f.read }
 
-     client.upload(dropbox_dest, file, mode: :add)
+     file_contents = File.read(image_path)
+     client = dropbox_client
+     puts "✅ Dropbox client initialized"
+
+     # Upload using dropbox_api gem
+     client.upload(dropbox_dest, file_contents)
      puts "✅ Upload complete!"
 
      # --- CREATE SHARED LINK ---
      begin
+       # Create shared link
        link = client.create_shared_link_with_settings(dropbox_dest)
        share_url = link.url
 
-       # Convert to direct image URL
-       direct_url = share_url.gsub('www.dropbox.com', 'dl.dropboxusercontent.com').gsub('?dl=0', '')
+       # Convert to direct URL for embedding
+       direct_url = share_url
+              .gsub('www.dropbox.com', 'dl.dropboxusercontent.com')
+              .gsub('?dl=0', '')  # Optional: clean up URL
 
-       puts "🔗 Direct File URL: #{direct_url}"
+       puts "🔗 Direct URL: #{direct_url}"
        return direct_url
 
-       #puts "🔗 File URL: #{link.url}"
-       #return link.url
      rescue DropboxApi::Errors::SharedLinkAlreadyExistsError
        # If the link already exists, retrieve the existing one instead of failing
        links = client.list_shared_links(path: dropbox_dest)
@@ -337,12 +352,9 @@ class ClipsController < ApplicationController
        end
      end
 
-   rescue DropboxApi::Errors::HttpError => e
-     puts "❌ Upload failed: #{e.message}"
-   rescue DropboxApi::Errors::HttpError => e
-     puts "❌ HTTP error: #{e.message}"
-   rescue StandardError => e
-     puts "⚠️ Error: #{e.message}"
+   rescue => e
+     puts "❌ Dropbox error: #{e.class} - #{e.message}"
+     puts e.backtrace.join("\n")
    end
 
  end
